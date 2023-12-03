@@ -1,0 +1,86 @@
+class Car
+{
+    private string nameOfCar;
+    private string colorOfCar;
+    private double priceOfCar;
+    private const string NameofCopanyOfCar = "KRCAR";
+    public Car()
+    {
+        
+    }
+    public Car(string name, string color, double price)
+    {
+        this.nameOfCar = name;
+        this.colorOfCar = color;
+        this.priceOfCar = price;
+    }
+    public void Input()
+    {
+        Console.Write("Car brand you want to buy - ");
+        nameOfCar = Console.ReadLine();
+
+        Console.Write("The color of the car you would like - ");
+        colorOfCar = Console.ReadLine();
+
+        Console.Write("Approximate price of the car - ");
+        double.TryParse(Console.ReadLine(), out priceOfCar);
+    }
+    public void Print()
+    {
+        Console.WriteLine($"Car Details:\nName: {nameOfCar}\nColor: {colorOfCar}\nPrice: {priceOfCar:C}\nCompany: {NameofCopanyOfCar}\n");
+    }
+    public void ChangePrice(double percentage)
+    {
+        priceOfCar -= priceOfCar * (percentage / 100);
+    }
+    public void PaintCar(string newColor)
+    {
+        if (colorOfCar.ToLower() == "white")
+        {
+            colorOfCar = newColor;
+            Console.WriteLine($"Car has been painted to {newColor}.");
+        }
+        else
+        {
+            Console.WriteLine("Car can only be painted if the current color is white.");
+        }
+    }
+    public string PrintInfo()
+    {
+        return $"Name of car - {nameOfCar}, Color of car - {colorOfCar}, Price of car - {priceOfCar:C}, Name of company - {NameofCopanyOfCar}";
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Car car1 = new Car();
+        Car car2 = new Car("Audi", "green", 300000);
+        Car car3 = new Car();
+        car1.Input();
+        car3.Input();
+        Console.WriteLine("Initial  details - ");
+        car1.Print();
+        car2.Print();
+        car3.Print();
+        car1.ChangePrice(10);
+        car2.ChangePrice(10);
+        car3.ChangePrice(10);
+        Console.WriteLine("After change:");
+        car1.Print();
+        car2.Print();
+        car3.Print();
+        Console.Write("Enter any new color - ");
+        string newColor = Console.ReadLine();
+        car1.PaintCar(newColor);
+        car3.PaintCar(newColor);
+        Console.WriteLine(" After painting -");
+        car1.Print();
+        car2.Print();
+        car3.Print();
+        Console.WriteLine("RESULT ");
+        Console.WriteLine(car1.PrintInfo());
+        Console.WriteLine(car2.PrintInfo());
+        Console.WriteLine(car3.PrintInfo());
+    }
+}
